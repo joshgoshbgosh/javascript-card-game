@@ -88,7 +88,7 @@ class Game {
       return   status = false;
     }
     // draw card from each deck
-    var p1card = p2deck.shift(),
+    var p1card = p1deck.shift(),
       p2card = p2deck.shift(),
       rewards = rewards ? rewards : [];
     console.log("p1", p1card)
