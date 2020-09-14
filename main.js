@@ -95,7 +95,7 @@ class Game {
     console.log("p2", p2card)
     // compare cards
     if (p1card.value === p2card.value) {
-      console.log('tie', p1card, p2card);
+      console.log('war', p1card, p2card);
       // tie
       // play another card
       rewards.push(p1card);
