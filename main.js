@@ -105,19 +105,17 @@ class Game {
     else if (p1card.value > p2card.value) {
       // Player wins
       console.log('Will Farrell wins round', p1card, p2card);
-      // Add point to player score TODO
-      // playerPoints.setAttribute('data-points', parseInt(playerPoints.getAttribute('data-points')) + 1)
-      // Reward Cards
+
       p1deck.splice(p1deck.length, 0, p1card, p2card);
       if (rewards.length > 0) {
         p1deck = p1deck.concat(rewards);
       }
     }
     else {
-      // CPU Wins
+      // chris Wins
       console.log('Chris Farley wins round', p1card, p2card);
-      // Add point to CPU score TODO
-      // cpuPoints.setAttribute('data-points', parseInt(cpuPoints.getAttribute('data-points')) + 1)
+      // Add point to chris score TODO
+      // chrisPoints.setAttribute('data-points', parseInt(cpuPoints.getAttribute('data-points')) + 1)
       // Reward Cards
       p2deck.splice(p2deck.length, 0, p2card, p1card);
       if (rewards.length > 0) {
