@@ -59,33 +59,34 @@ const deck = new Deck();
 
 
 class Player { //this is my main class set up
-  constructor(name,hand) {
+  constructor({name}) {
     this.name = name;
-    this.hand = deck.cards.splice(0,26);
+    this.hand = deck.cards.splice(0, 26);
   }
 }
-
-const Will_Farrell = new Player();
-const Chris_Farley = new Player();
 let status = true;
 class Game {
-  constructor(status){
+  constructor(status) {
     this.status = true;
+    this.player1 = new Player({name: 'Will Ferrell'});
+    this.player2 = new Player({name: 'Chris Farley'});
   }
-  drawAndPlay (rewards) {
-    let p1deck = Will_Farrell.hand
-    let p2deck = Chris_Farley.hand
-    if (rewards) { console.log('rewards = ', rewards); }
+  drawAndPlay(rewards) {
+    let p1deck = this.player1.hand;
+    let p2deck = this.player2.hand;
+    if (rewards) {
+      console.log('rewards = ', rewards);
+    }
     // if either deck is empty, game over
     if (p1deck.length === 0 || p2deck.length === 0) {
       // game over
 
       if (p1deck.length > 0) {
-        console.log('Will Farrell Won');
+        console.log(`${this.player1.name} won!`);
       } else {
-        console.log('Chris Farley Won');
+        console.log(`${this.player2.name} won!`);
       }
-      return   status = false;
+      return status = false;
     }
     // draw card from each deck
     var p1card = p1deck.shift(),
@@ -100,9 +101,22 @@ class Game {
       // play another card
       rewards.push(p1card);
       rewards.push(p2card);
+      // each player needs to put a card face down before we draw and compare cards again
+      const faceDownCard1 = p1deck.shift();
+      const faceDownCard2 = p2deck.shift();
+      rewards.push(faceDownCard1);
+      rewards.push(faceDownCard2);
+
+
+      // const faceDownCards1 = p1deck.slice(0, 3);
+      // const faceDownCards2 = p2deck.slice(0, 3);
+      //
+      // rewards = rewards.concat(faceDownCards1);
+      // rewards = rewards.concat(faceDownCards2);
+
+      // rewards = [...rewards, p1card, p2card, p1deck.shift(), p2deck.shift()];
       return this.drawAndPlay(rewards);
-    }
-    else if (p1card.value > p2card.value) {
+    } else if (p1card.value > p2card.value) {
       // Player wins
       console.log('Will Farrell wins round', p1card, p2card);
 
@@ -110,8 +124,7 @@ class Game {
       if (rewards.length > 0) {
         p1deck = p1deck.concat(rewards);
       }
-    }
-    else {
+    } else {
       // chris Wins
       console.log('Chris Farley wins round', p1card, p2card);
       // Add point to chris score TODO
